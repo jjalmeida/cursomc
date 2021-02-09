@@ -1,26 +1,31 @@
 package com.estudo.cursomc;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.estudo.cursomc.domain.Categoria;
+import com.estudo.cursomc.repositories.CategoriaRepository;
 
 @SpringBootApplication
-public class CursomcApplication {
+public class CursomcApplication implements CommandLineRunner {
+	
+	@Autowired
+	private CategoriaRepository categoriaRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
 	}
 
-	/*
-	 Categoria cat1 = new Categoria(1,"Informática");
-		Categoria cat2 = new Categoria(2,"Escritório");
+	@Override
+	public void run(String... args) throws Exception {
+		Categoria cat1 = new Categoria(null,"Informática");
+		Categoria cat2 = new Categoria(null,"Escritório");
 		
-		List<Categoria> lista = new ArrayList<>();
-		lista.add(cat1);
-		lista.add(cat2);
-	 * */
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+	}
+
 }
