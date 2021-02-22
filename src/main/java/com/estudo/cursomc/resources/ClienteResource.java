@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.estudo.cursomc.domain.Cliente;
 import com.estudo.cursomc.dto.ClienteDTO;
+import com.estudo.cursomc.dto.ClienteNewDTO;
 import com.estudo.cursomc.services.ClienteService;
 
 @RestController
@@ -34,7 +37,7 @@ public class ClienteResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody ClienteDTO objDto){
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto){
 		Cliente obj = clienteService.fromDto(objDto);
 		obj = clienteService.insert(obj);
 		
